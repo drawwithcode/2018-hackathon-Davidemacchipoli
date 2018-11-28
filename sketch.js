@@ -1,6 +1,7 @@
 
 var mySong;
 var myImage;
+
 //var button1;
 //var button2;
 
@@ -49,51 +50,86 @@ function draw() {
 
   imageMode(CENTER);
      image(myImage, windowWidth/2, windowHeight/2, windowWidth/2*p, windowHeight/2*p);
+push();
 
+// piatti che vengono distribuiti
+for (var j = 0; j<50; j = j + 10) {
   rectMode(CENTER);
-  rect(windowWidth/2,windowHeight/2,18*s,0.6*s);
-    rect(windowWidth/2,windowHeight/3,18*p,0.6*p);
+  //distribuire dal centro dello schermo
+  translate(windowWidth/2, windowHeight/2);
+  rotate(s/15);
+  fill('white');
+  //forma del piatto che si ingrandisce con la musica
+  ellipse(0,0, 3.6*p,3.6*p);
+    ellipse(0,0, 2.6*p,2.6*p);
+
+
+
+}
+    pop();
 
     push();
-    translate(windowWidth/2,windowHeight/2);
+    translate(windowWidth/2,windowHeight/4);
     //amp = ampiezza dello spettro.
 
+    //fuoco d'artificio dietro lo starring che segue la frequenza della musica
+if ( p >= 8) {
+angleMode(RADIANS);
     for (var i = 0; i < spectrum.length; i++) {
-        var angle = map(i, 200, spectrum.length, 300, 360);
+        var angle = map(i, 200, spectrum.length, 400, 360);
         var amp = spectrum[i];
         var r = map(amp, 0, 256, 0, 290);
         var x = r * cos(angle);
         var y = r * sin(angle);
         stroke(255, i, i);
+
         line(0, 0, x, y);
     };
+  };
     pop();
 
+//titoli
 
+push();
     textSize(1.8*s);
+    fill('white');
     textAlign(CENTER);
     	text('2 Broke girls', windowWidth/2, windowHeight/10);
 
+      pop();
+
+
+      push();
+      if (s >= 35 ) {
+          textSize(1.6*s);
+          textAlign(CENTER);
+          fill(139,0,0);
+
+          	text('Starring', windowWidth/2, windowHeight/5);
+}
+            pop();
+
+
+            if (s >= 35 ) {
+                textSize(1.8*s);
+                textAlign(CENTER);
+                fill('white');
+                  text('Kat Dennings & Beth Behrs', windowWidth/2, windowHeight/3);
+        }
+                  pop();
+
+
+
+                  push();
+                      textSize(0.38*s);
+                      fill('white');
+                      textAlign(CENTER);
+                      textFont('Arial');
+                      	text('ATTENZIONE: distribuzione veloce di piatti', windowWidth/2, windowHeight/2.3);
+
+                        pop();
 
 
 
   // put drawing code here
 };
-
-function stop() {
-  if(mySong.isPlaying()) {
-   mySong.pause();
-   }
-}
-
-function Replay() {
-  if (mySong.isPaused()){
-   mySong.loop();
-   }
-}
-
-
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
