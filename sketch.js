@@ -103,7 +103,7 @@ push();
       if (s >= 35 ) {
           textSize(1.6*s);
           textAlign(CENTER);
-          fill(139,0,0);
+          fill('yellow');
 
           	text('Starring', windowWidth/2, windowHeight/5);
 }
@@ -133,3 +133,7 @@ push();
 
   // put drawing code here
 };
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
